@@ -11,7 +11,9 @@
             --card-bg: #ffffff;
             --text-dark: #1f2937;
             --text-gray: #6b7280;
-            --weather-blue: #2563eb;
+            --primary: #2e7d32;
+            --accent: #f57c00;
+            --danger: #ef4444;
         }
 
         * {
@@ -66,7 +68,6 @@
             font-size: 0.75rem;
             color: #d1fae5;
             font-weight: 500;
-            letter-spacing: 0.5px;
         }
 
         .cloud-badge {
@@ -75,9 +76,6 @@
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .container {
@@ -100,9 +98,6 @@
         .weather-location {
             font-size: 0.8rem;
             opacity: 0.9;
-            display: flex;
-            align-items: center;
-            gap: 4px;
             margin-bottom: 6px;
         }
 
@@ -130,6 +125,17 @@
             font-weight: 700;
             margin-bottom: 14px;
             color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         /* GRID MENÜ KARTLARI */
@@ -192,6 +198,65 @@
             justify-content: center;
         }
 
+        /* FORMLAR VE DETAY SAYFALARI */
+        .page-content {
+            display: none;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:active {
+            opacity: 0.9;
+        }
+
+        .item-list-card {
+            border-bottom: 1px solid #f3f4f6;
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-list-card:last-child {
+            border-bottom: none;
+        }
+
         /* BOTTOM NAV BAR */
         .bottom-nav {
             position: fixed;
@@ -215,6 +280,7 @@
             font-size: 0.7rem;
             font-weight: 600;
             gap: 2px;
+            cursor: pointer;
         }
 
         .nav-item.active {
@@ -237,77 +303,270 @@
                 <span>ÇİFTLİĞİ</span>
             </div>
         </div>
-        <div class="cloud-badge">
-            🔥 Canlı Bulut
-        </div>
+        <div class="cloud-badge">🔥 Canlı Bulut</div>
     </header>
 
     <div class="container">
 
-        <!-- HAVA DURUMU KARTI -->
-        <div class="weather-card">
-            <div class="weather-location">📍 Sakarya Çiftlik Konumu</div>
-            <div class="weather-temp">28°C</div>
-            <div class="weather-desc">Bulutlu - Tarla ve saha işleri için uygun.</div>
-            <div class="weather-icon">☁️</div>
+        <!-- ANA SAYFA EKRANI -->
+        <div id="page-home">
+            <!-- HAVA DURUMU KARTI -->
+            <div class="weather-card">
+                <div class="weather-location">📍 Sakarya Çiftlik Konumu</div>
+                <div class="weather-temp">28°C</div>
+                <div class="weather-desc">Bulutlu - Tarla ve saha işleri için uygun.</div>
+                <div class="weather-icon">☁️</div>
+            </div>
+
+            <div class="section-title">Ana Sayfa</div>
+
+            <!-- 2x2 MENÜ KARTLARI -->
+            <div class="menu-grid">
+                <div class="menu-card" onclick="openPage('satis')">
+                    <div class="card-icon">🛒</div>
+                    <div class="card-title">1. Satış / Talep</div>
+                    <div class="card-sub">Onaya gönder</div>
+                </div>
+
+                <div class="menu-card" onclick="openPage('onay')">
+                    <div class="badge-count" id="badgeCount">2</div>
+                    <div class="card-icon">🔔</div>
+                    <div class="card-title">2. Onay Bekleyenler</div>
+                    <div class="card-sub">Düzelt & Onayla</div>
+                </div>
+
+                <div class="menu-card" onclick="openPage('stok')">
+                    <div class="card-icon">📥</div>
+                    <div class="card-title">3. Stok Ekle</div>
+                    <div class="card-sub">Onaya gider</div>
+                </div>
+
+                <div class="menu-card" onclick="openPage('tahsilat')">
+                    <div class="card-icon">💰</div>
+                    <div class="card-title">4. Tahsilat / Ödeme</div>
+                    <div class="card-sub">Onaya gider</div>
+                </div>
+            </div>
         </div>
 
-        <div class="section-title">Ana Sayfa</div>
-
-        <!-- 2x2 MENÜ KARTLARI -->
-        <div class="menu-grid">
-            
-            <div class="menu-card" onclick="alert('Satış / Talep Ekranı')">
-                <div class="card-icon">🛒</div>
-                <div class="card-title">1. Satış / Talep</div>
-                <div class="card-sub">Onaya gönder</div>
+        <!-- 1. SATIŞ / TALEP EKRANI -->
+        <div id="page-satis" class="page-content">
+            <div class="section-title">
+                <span>🛒 Satış / Talep Ekle</span>
+                <span class="back-btn" onclick="openPage('home')">← Geri</span>
             </div>
-
-            <div class="menu-card" onclick="alert('Onay Bekleyenler Ekranı')">
-                <div class="badge-count">5</div>
-                <div class="card-icon">🔔</div>
-                <div class="card-title">2. Onay Bekleyenler</div>
-                <div class="card-sub">Düzelt & Onayla</div>
+            <div class="form-group">
+                <label>Müşteri Adı Soyadı</label>
+                <input type="text" id="satisMusteri" placeholder="Örn: Ahmet Yılmaz">
             </div>
-
-            <div class="menu-card" onclick="alert('Stok Ekle Ekranı')">
-                <div class="card-icon">📥</div>
-                <div class="card-title">3. Stok Ekle</div>
-                <div class="card-sub">Onaya gider</div>
+            <div class="form-group">
+                <label>Ürün / Yem Türü</label>
+                <select id="satisUrun">
+                    <option>Süt Yemi (Çuval)</option>
+                    <option>Besi Yemi (Çuval)</option>
+                    <option>Saman Balyası (Adet)</option>
+                    <option>Yonca (Adet)</option>
+                </select>
             </div>
-
-            <div class="menu-card" onclick="alert('Tahsilat / Ödeme Ekranı')">
-                <div class="card-icon">💰</div>
-                <div class="card-title">4. Tahsilat / Ödeme</div>
-                <div class="card-sub">Onaya gider</div>
+            <div class="form-group">
+                <label>Miktar</label>
+                <input type="number" id="satisMiktar" placeholder="Örn: 20">
             </div>
+            <div class="form-group">
+                <label>Tutar (TL)</label>
+                <input type="number" id="satisTutar" placeholder="Örn: 9000">
+            </div>
+            <button onclick="satisGonder()">Onaya Gönder</button>
+        </div>
 
+        <!-- 2. ONAY BEKLEYENLER EKRANI -->
+        <div id="page-onay" class="page-content">
+            <div class="section-title">
+                <span>🔔 Onay Bekleyenler</span>
+                <span class="back-btn" onclick="openPage('home')">← Geri</span>
+            </div>
+            <div id="onayListesi"></div>
+        </div>
+
+        <!-- 3. STOK EKLE EKRANI -->
+        <div id="page-stok" class="page-content">
+            <div class="section-title">
+                <span>📥 Stok Yönetimi</span>
+                <span class="back-btn" onclick="openPage('home')">← Geri</span>
+            </div>
+            <div class="form-group">
+                <label>Yem / Mühimmat Türü</label>
+                <select id="stokTur">
+                    <option value="Süt Yemi">Süt Yemi</option>
+                    <option value="Besi Yemi">Besi Yemi</option>
+                    <option value="Saman Balyası">Saman Balyası</option>
+                    <option value="Yonca">Yonca</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Eklenecek Miktar</label>
+                <input type="number" id="stokMiktar" placeholder="Örn: 50">
+            </div>
+            <button onclick="stokEkle()">Mevcut Stoğa Ekle</button>
+
+            <h3 style="margin-top:20px; font-size:1rem;">Mevcut Stoklar</h3>
+            <div id="stokListesi" style="margin-top:10px;"></div>
+        </div>
+
+        <!-- 4. TAHSİLAT / ÖDEME EKRANI -->
+        <div id="page-tahsilat" class="page-content">
+            <div class="section-title">
+                <span>💰 Tahsilat & Borç Defteri</span>
+                <span class="back-btn" onclick="openPage('home')">← Geri</span>
+            </div>
+            <div class="form-group">
+                <label>Müşteri Adı</label>
+                <input type="text" id="borcMusteri" placeholder="Örn: Mehmet Ali">
+            </div>
+            <div class="form-group">
+                <label>Açıklama</label>
+                <input type="text" id="borcAciklama" placeholder="Örn: 10 Çuval Yem">
+            </div>
+            <div class="form-group">
+                <label>Borç Tutarı (TL)</label>
+                <input type="number" id="borcTutar" placeholder="Örn: 4500">
+            </div>
+            <button style="background-color: var(--accent);" onclick="borcEkle()">Borç Kaydet</button>
+
+            <h3 style="margin-top:20px; font-size:1rem;">Borçlu Listesi</h3>
+            <div id="borcListesi" style="margin-top:10px;"></div>
         </div>
 
     </div>
 
-    <!-- ALT MENÜ (NAVBAR) -->
+    <!-- ALT MENÜ -->
     <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
+        <div class="nav-item active" onclick="openPage('home')">
             <span class="nav-icon">🏠</span>
             <span>Ana Sayfa</span>
-        </a>
-        <a href="#" class="nav-item">
+        </div>
+        <div class="nav-item" onclick="openPage('satis')">
             <span class="nav-icon">🛒</span>
             <span>Satış</span>
-        </a>
-        <a href="#" class="nav-item">
+        </div>
+        <div class="nav-item" onclick="openPage('onay')">
             <span class="nav-icon">🔔</span>
             <span>Onay</span>
-        </a>
-        <a href="#" class="nav-item">
+        </div>
+        <div class="nav-item" onclick="openPage('tahsilat')">
             <span class="nav-icon">📒</span>
             <span>Borçlar</span>
-        </a>
+        </div>
     </nav>
 
+    <script>
+        let stoklar = JSON.parse(localStorage.getItem('dk_stoklar')) || {
+            'Süt Yemi': 120, 'Besi Yemi': 85, 'Saman Balyası': 300, 'Yonca': 150
+        };
+
+        let onayBekleyenler = JSON.parse(localStorage.getItem('dk_onaylar')) || [
+            { id: 1, musteri: 'Ahmet Yılmaz', urun: '20 Çuval Süt Yemi', tutar: 9000 },
+            { id: 2, musteri: 'Hasan Kara', urun: '50 Adet Saman', tutar: 3500 }
+        ];
+
+        let borclar = JSON.parse(localStorage.getItem('dk_borclar')) || [
+            { id: 1, musteri: 'Mehmet Ali', aciklama: '10 Çuval Yem', tutar: 4500 }
+        ];
+
+        function openPage(pageName) {
+            document.getElementById('page-home').style.display = 'none';
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+
+            if (pageName === 'home') {
+                document.getElementById('page-home').style.display = 'block';
+            } else {
+                document.getElementById('page-' + pageName).classList.add('active');
+            }
+            renderAll();
+        }
+
+        function renderAll() {
+            // Stok Listesi
+            const stokEl = document.getElementById('stokListesi');
+            stokEl.innerHTML = '';
+            for (let [k, v] of Object.entries(stoklar)) {
+                stokEl.innerHTML += `<div class="item-list-card"><strong>${k}</strong><span>${v} Adet/Çuval</span></div>`;
+            }
+
+            // Onay Listesi
+            const onayEl = document.getElementById('onayListesi');
+            onayEl.innerHTML = '';
+            document.getElementById('badgeCount').innerText = onayBekleyenler.length;
+            if(onayBekleyenler.length === 0) onayEl.innerHTML = '<p style="color:#666;">Onay bekleyen işlem yok.</p>';
+            onayBekleyenler.forEach((item, index) => {
+                onayEl.innerHTML += `
+                    <div class="item-list-card">
+                        <div>
+                            <strong>${item.musteri}</strong><br>
+                            <small>${item.urun} - ${item.tutar} TL</small>
+                        </div>
+                        <button style="width:auto; padding:6px 12px; margin:0;" onclick="onayla(${index})">Onayla</button>
+                    </div>`;
+            });
+
+            // Borç Listesi
+            const borcEl = document.getElementById('borcListesi');
+            borcEl.innerHTML = '';
+            borclar.forEach((item, index) => {
+                borcEl.innerHTML += `
+                    <div class="item-list-card">
+                        <div>
+                            <strong>${item.musteri}</strong><br>
+                            <small>${item.aciklama}</small>
+                        </div>
+                        <span style="color:red; font-weight:bold;">${item.tutar} TL</span>
+                    </div>`;
+            });
+
+            localStorage.setItem('dk_stoklar', JSON.stringify(stoklar));
+            localStorage.setItem('dk_onaylar', JSON.stringify(onayBekleyenler));
+            localStorage.setItem('dk_borclar', JSON.stringify(borclar));
+        }
+
+        function satisGonder() {
+            const m = document.getElementById('satisMusteri').value;
+            const u = document.getElementById('satisUrun').value;
+            const t = document.getElementById('satisTutar').value;
+            if(!m || !t) return alert('Lütfen bilgileri doldurun!');
+            onayBekleyenler.push({ id: Date.now(), musteri: m, urun: u, tutar: t });
+            alert('Satış talebi onaya gönderildi!');
+            openPage('home');
+        }
+
+        function stokEkle() {
+            const tur = document.getElementById('stokTur').value;
+            const mik = parseInt(document.getElementById('stokMiktar').value) || 0;
+            if(mik <= 0) return alert('Geçerli miktar girin!');
+            stoklar[tur] = (stoklar[tur] || 0) + mik;
+            alert('Stok eklendi!');
+            renderAll();
+        }
+
+        function borcEkle() {
+            const m = document.getElementById('borcMusteri').value;
+            const a = document.getElementById('borcAciklama').value;
+            const t = document.getElementById('borcTutar').value;
+            if(!m || !t) return alert('Lütfen bilgileri doldurun!');
+            borclar.push({ id: Date.now(), musteri: m, aciklama: a, tutar: t });
+            renderAll();
+        }
+
+        function onayla(index) {
+            onayBekleyenler.splice(index, 1);
+            alert('İşlem onaylandı!');
+            renderAll();
+        }
+
+        renderAll();
+    </script>
 </body>
 </html>
+
 
 
 
