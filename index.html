@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMİRKAPI ÇİFTLİĞİ</title>
+    <style>
+        :root {
+            --green-main: #1e5631;
+            --bg-light: #f5f6f8;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            padding-bottom: 70px;
+        }
+
+        header {
+            background-color: var(--green-main);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-box {
+            background: #fbc02d;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .header-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .live-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .main-container {
+            padding: 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background-color: #fff;
+        }
+
+        .cart-box {
+            border: 1px solid #ffcdd2;
+            background: #fff8f8;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .btn-delete {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #e53935;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--green-main);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-brand">
+            <div class="logo-box">🌾</div>
+            <div class="header-title">DEMİRKAPI</div>
+        </div>
+        <div class="live-badge">🔥 Canlı Bulut</div>
+    </header>
+
+    <div class="main-container">
+        <div class="card">
+            <div class="card-title">🛒 Satış Talebi</div>
+
+            <div class="form-group">
+                <label>Müşteri Adı / Cari Seçimi</label>
+                <input type="text" class="form-input" placeholder="Ad Soyad yazın...">
+            </div>
+
+            <div class="form-group">
+                <label>Sepetteki Ürünler</label>
+                <div class="cart-box">
+                    <button class="btn-delete">Sil</button>
+                    <div style="margin-top: 15px;">
+                        <label style="font-size: 0.8rem; font-weight: bold;">Ürün Seç</label>
+                        <select class="form-select">
+                            <option value="">Seçiniz...</option>
+                            <option>1001 Yumurta Civciv Yemi (4-8) (Stok: 2 Adet)</option>
+                            <option>1001 Yumurta Piliç Büyütme Yemi (Stok: 26 Adet)</option>
+                            <option>Avantaj Buzağı Büyütme (Stok: 113 Adet)</option>
+                            <option>Avantaj Süt (Stok: 127 Adet)</option>
+                            <option>Boş Slaj (Stok: 544 Adet)</option>
+                            <option>Depar (Stok: 68 Adet)</option>
+                            <option>Dolu B (Stok: 1 Adet)</option>
+                            <option>Dolu B Toz (Stok: 84 Adet)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label>Miktar (Adet)</label>
+                        <input type="number" class="form-input" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Birim Fiyat (TL)</label>
+                        <input type="number" class="form-input" placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item"><span class="nav-icon">🏠</span><span>Ana Sayfa</span></a>
+        <a href="#" class="nav-item active"><span class="nav-icon">🛒</span><span>Satış</span></a>
+        <a href="#" class="nav-item"><span class="nav-icon">🔔</span><span>Onay</span></a>
+        <a href="#" class="nav-item"><span class="nav-icon">📒</span><span>Borçlar</span></a>
+    </div>
+
+</body>
+</html>
