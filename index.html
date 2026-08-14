@@ -2,17 +2,16 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demirkapı Çiftliği - Yönetim Paneli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Demirkapı Çiftliği</title>
     <style>
         :root {
-            --primary: #2e7d32;
-            --primary-dark: #1b5e20;
-            --accent: #f57c00;
-            --bg: #f4f6f8;
+            --header-bg: #116d38;
+            --bg-color: #f3f4f6;
             --card-bg: #ffffff;
-            --text: #333333;
-            --danger: #d32f2f;
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --weather-blue: #2563eb;
         }
 
         * {
@@ -20,371 +19,295 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            padding-bottom: 30px;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding-bottom: 90px;
         }
 
+        /* ÜST HEADER */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background-color: var(--header-bg);
             color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 15px auto;
-            padding: 0 15px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .card h2 {
-            font-size: 1.2rem;
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 8px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .header-left {
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        @media (max-width: 500px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #555;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--primary);
-        }
-
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 5px;
-        }
-
-        button:active {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-orange {
-            background-color: var(--accent);
-        }
-
-        .stock-item {
+        .logo-box {
+            background: #facc15;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px dashed #eee;
+            justify-content: center;
+            font-size: 22px;
         }
 
-        .stock-item:last-child {
-            border-bottom: none;
-        }
-
-        .stock-title {
-            font-weight: 600;
-        }
-
-        .stock-value {
+        .header-title h1 {
             font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--primary-dark);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
         }
 
-        .calc-result {
-            background: #e8f5e9;
-            border: 1px solid #c8e6c9;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+        .header-title span {
+            font-size: 0.75rem;
+            color: #d1fae5;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .cloud-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .container {
+            padding: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* HAVA DURUMU KARTI */
+        .weather-card {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            position: relative;
+        }
+
+        .weather-location {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .weather-temp {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .weather-desc {
+            font-size: 0.8rem;
+            opacity: 0.95;
+        }
+
+        .weather-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 40px;
+        }
+
+        /* SAYFA BAŞLIĞI */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--text-dark);
+        }
+
+        /* GRID MENÜ KARTLARI */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px 12px;
             text-align: center;
-        }
-
-        .calc-result h3 {
-            font-size: 1.4rem;
-            color: var(--primary-dark);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        th {
-            background-color: #f8f9fa;
-            color: #666;
-        }
-
-        .badge-debt {
-            color: var(--danger);
-            font-weight: bold;
-        }
-
-        .delete-btn {
-            background: none;
-            border: none;
-            color: var(--danger);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
             cursor: pointer;
-            width: auto;
-            padding: 0;
-            font-size: 1.2rem;
+            transition: transform 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 130px;
+        }
+
+        .menu-card:active {
+            transform: scale(0.97);
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .card-sub {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* BOTTOM NAV BAR */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--header-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 600;
+            gap: 2px;
+        }
+
+        .nav-item.active {
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
 
+    <!-- ÜST BAR -->
     <header>
-        <h1>Demirkapı Çiftliği</h1>
-        <p>Yem Stok, Satış & Veresiye Takibi</p>
+        <div class="header-left">
+            <div class="logo-box">🌾</div>
+            <div class="header-title">
+                <h1>DEMİRKAPI</h1>
+                <span>ÇİFTLİĞİ</span>
+            </div>
+        </div>
+        <div class="cloud-badge">
+            🔥 Canlı Bulut
+        </div>
     </header>
 
     <div class="container">
-        
-        <!-- YEM STOK DURUMU -->
-        <div class="card">
-            <h2>📦 Yem & Mühimmat Stoğu</h2>
-            <div id="stockList">
-                <!-- Stoklar JS ile gelecek -->
-            </div>
-            <hr style="margin: 15px 0; border: none; border-top: 1px solid #eee;">
-            <h3>Stok Ekle / Güncelle</h3>
-            <div class="grid-2" style="margin-top: 10px;">
-                <div class="form-group">
-                    <label>Yem Türü</label>
-                    <select id="stockType">
-                        <option value="Süt Yemi">Süt Yemi (Çuval)</option>
-                        <option value="Besi Yemi">Besi Yemi (Çuval)</option>
-                        <option value="Saman Balyası">Saman Balyası (Adet)</option>
-                        <option value="Yonca">Yonca (Adet)</option>
-                        <option value="Silaj">Silaj (Ton)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Miktar</label>
-                    <input type="number" id="stockQty" placeholder="Örn: 50">
-                </div>
-            </div>
-            <button onclick="addStock()">Stoğa Ekle</button>
+
+        <!-- HAVA DURUMU KARTI -->
+        <div class="weather-card">
+            <div class="weather-location">📍 Sakarya Çiftlik Konumu</div>
+            <div class="weather-temp">28°C</div>
+            <div class="weather-desc">Bulutlu - Tarla ve saha işleri için uygun.</div>
+            <div class="weather-icon">☁️</div>
         </div>
 
-        <!-- HIZLI SATIŞ HESAPLAMA -->
-        <div class="card">
-            <h2>🧮 Hızlı Satış Hesaplayıcı</h2>
-            <div class="grid-2">
-                <div class="form-group">
-                    <label>Ürün / Yem</label>
-                    <select id="calcType">
-                        <option value="Süt Yemi">Süt Yemi</option>
-                        <option value="Besi Yemi">Besi Yemi</option>
-                        <option value="Saman Balyası">Saman Balyası</option>
-                        <option value="Yonca">Yonca</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Birim Fiyat (TL)</label>
-                    <input type="number" id="calcPrice" placeholder="Örn: 450" oninput="calculateTotal()">
-                </div>
-                <div class="form-group">
-                    <label>Adet / Miktar</label>
-                    <input type="number" id="calcQty" placeholder="Örn: 10" oninput="calculateTotal()">
-                </div>
-            </div>
+        <div class="section-title">Ana Sayfa</div>
+
+        <!-- 2x2 MENÜ KARTLARI -->
+        <div class="menu-grid">
             
-            <div class="calc-result">
-                <span>Toplam Tutar</span>
-                <h3 id="calcTotal">0 TL</h3>
+            <div class="menu-card" onclick="alert('Satış / Talep Ekranı')">
+                <div class="card-icon">🛒</div>
+                <div class="card-title">1. Satış / Talep</div>
+                <div class="card-sub">Onaya gönder</div>
             </div>
-        </div>
 
-        <!-- MÜŞTERİ VERESİYE DEFTERİ -->
-        <div class="card">
-            <h2>📋 Veresiye & Borç Defteri</h2>
-            <div class="form-group">
-                <label>Müşteri Adı Soyadı</label>
-                <input type="text" id="debtName" placeholder="Örn: Ahmet Yılmaz">
+            <div class="menu-card" onclick="alert('Onay Bekleyenler Ekranı')">
+                <div class="badge-count">5</div>
+                <div class="card-icon">🔔</div>
+                <div class="card-title">2. Onay Bekleyenler</div>
+                <div class="card-sub">Düzelt & Onayla</div>
             </div>
-            <div class="grid-2">
-                <div class="form-group">
-                    <label>Açıklama / Ürün</label>
-                    <input type="text" id="debtDesc" placeholder="Örn: 20 Çuval Besi Yemi">
-                </div>
-                <div class="form-group">
-                    <label>Tutar (TL)</label>
-                    <input type="number" id="debtAmount" placeholder="Örn: 9000">
-                </div>
-            </div>
-            <button class="btn-orange" onclick="addDebt()">Borç Kaydet</button>
 
-            <table style="margin-top: 20px;">
-                <thead>
-                    <tr>
-                        <th>İsim</th>
-                        <th>Detay</th>
-                        <th>Tutar</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="debtList">
-                    <!-- Borçlar JS ile gelecek -->
-                </tbody>
-            </table>
+            <div class="menu-card" onclick="alert('Stok Ekle Ekranı')">
+                <div class="card-icon">📥</div>
+                <div class="card-title">3. Stok Ekle</div>
+                <div class="card-sub">Onaya gider</div>
+            </div>
+
+            <div class="menu-card" onclick="alert('Tahsilat / Ödeme Ekranı')">
+                <div class="card-icon">💰</div>
+                <div class="card-title">4. Tahsilat / Ödeme</div>
+                <div class="card-sub">Onaya gider</div>
+            </div>
+
         </div>
 
     </div>
 
-    <script>
-        // Varsayılan Veriler
-        let stocks = JSON.parse(localStorage.getItem('dk_stocks')) || {
-            'Süt Yemi': 120,
-            'Besi Yemi': 85,
-            'Saman Balyası': 300,
-            'Yonca': 150,
-            'Silaj': 25
-        };
-
-        let debts = JSON.parse(localStorage.getItem('dk_debts')) || [
-            { id: 1, name: 'Mehmet Ali', desc: '10 Çuval Süt Yemi', amount: 4500 }
-        ];
-
-        function saveAndRender() {
-            localStorage.setItem('dk_stocks', JSON.stringify(stocks));
-            localStorage.setItem('dk_debts', JSON.stringify(debts));
-            renderStocks();
-            renderDebts();
-        }
-
-        function renderStocks() {
-            const container = document.getElementById('stockList');
-            container.innerHTML = '';
-            for (let [item, qty] of Object.entries(stocks)) {
-                let unit = (item === 'Silaj') ? 'Ton' : (item.includes('Balya') || item === 'Yonca' ? 'Adet' : 'Çuval');
-                container.innerHTML += `
-                    <div class="stock-item">
-                        <span class="stock-title">${item}</span>
-                        <span class="stock-value">${qty} ${unit}</span>
-                    </div>
-                `;
-            }
-        }
-
-        function addStock() {
-            const type = document.getElementById('stockType').value;
-            const qty = parseFloat(document.getElementById('stockQty').value);
-
-            if (!qty || qty <= 0) return alert('Lütfen geçerli bir miktar girin!');
-
-            stocks[type] = (stocks[type] || 0) + qty;
-            document.getElementById('stockQty').value = '';
-            saveAndRender();
-        }
-
-        function calculateTotal() {
-            const price = parseFloat(document.getElementById('calcPrice').value) || 0;
-            const qty = parseFloat(document.getElementById('calcQty').value) || 0;
-            document.getElementById('calcTotal').innerText = (price * qty).toLocaleString('tr-TR') + ' TL';
-        }
-
-        function renderDebts() {
-            const container = document.getElementById('debtList');
-            container.innerHTML = '';
-            debts.forEach((debt, index) => {
-                container.innerHTML += `
-                    <tr>
-                        <td><strong>${debt.name}</strong></td>
-                        <td>${debt.desc}</td>
-                        <td class="badge-debt">${debt.amount.toLocaleString('tr-TR')} TL</td>
-                        <td><button class="delete-btn" onclick="removeDebt(${index})">🗑️</button></td>
-                    </tr>
-                `;
-            });
-        }
-
-        function addDebt() {
-            const name = document.getElementById('debtName').value.trim();
-            const desc = document.getElementById('debtDesc').value.trim();
-            const amount = parseFloat(document.getElementById('debtAmount').value);
-
-            if (!name || !amount) return alert('Lütfen isim ve tutar girin!');
-
-            debts.push({ name, desc, amount });
-            document.getElementById('debtName').value = '';
-            document.getElementById('debtDesc').value = '';
-            document.getElementById('debtAmount').value = '';
-            saveAndRender();
-        }
-
-        function removeDebt(index) {
-            if (confirm('Bu borç kaydını silmek/tahsil edildi olarak işaretlemek istiyor musunuz?')) {
-                debts.splice(index, 1);
-                saveAndRender();
-            }
-        }
-
-        // İlk Yükleme
-        saveAndRender();
-    </script>
+    <!-- ALT MENÜ (NAVBAR) -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span>Ana Sayfa</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">🛒</span>
+            <span>Satış</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">🔔</span>
+            <span>Onay</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">📒</span>
+            <span>Borçlar</span>
+        </a>
+    </nav>
 
 </body>
 </html>
+
 
 
